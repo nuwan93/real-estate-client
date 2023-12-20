@@ -39,7 +39,6 @@ export default function SignUp() {
         return;
       }
       toast.success("Successfully created!");
-      setError("");
       navigate("/sign-in");
     } catch (error) {
       toast.error(error.message);
@@ -76,7 +75,10 @@ export default function SignUp() {
           onChange={handleChange}
           value={formData.password}
         />
-        <button className="bg-slate-700 p-3 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80">
+        <button
+          disabled={loading}
+          className="bg-slate-700 p-3 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
+        >
           {loading ? "Loading..." : "Sign Up"}
         </button>
       </form>
