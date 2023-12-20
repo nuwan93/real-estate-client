@@ -25,3 +25,15 @@ app.listen(3000, () => {
 
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
+
+//Middleware for error handling
+app.use((err, req, res, next) => {
+  const message = err.message || "internel server error";
+  const statusCode = err.statusCode || 501;
+
+  res.status(statusCode).json({
+    success: false,
+    statusCode,
+    message,
+  });
+});
