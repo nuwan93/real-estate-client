@@ -8,4 +8,4 @@ This project is a MERN stack application developed following a tutorial from [th
 
 ## Live
 
-Visit https://nuwan-estate.onrender.com/sign-in to view this project live
+Visit https://nuwan-estate.onrender.com/ to view this project live
