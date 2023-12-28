@@ -69,11 +69,6 @@ export default function Profile() {
     });
   };
 
-  const onSignOutClick = () => {
-    dispatch(signOut());
-    toast.success("Successfully signed out! ");
-  };
-
   const handleUpload = () => {
     const storage = getStorage(app);
     const fileName = new Date().getTime() + file.name;
@@ -105,7 +100,31 @@ export default function Profile() {
       });
 
       const data = await res.json();
+
+      if (data.success === false) {
+        toast.error(data.message);
+        return;
+      }
+
       dispatch(deleteSuccess());
+      toast.success(data);
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  const handleUserSignedOut = async () => {
+    try {
+      const res = await fetch("/api/auth/signout");
+
+      const data = await res.json();
+
+      if (data.success === false) {
+        toast.error(data.message);
+        return;
+      }
+
+      dispatch(signOut());
       toast.success(data);
     } catch (error) {
       toast.error(error.message);
@@ -174,7 +193,7 @@ export default function Profile() {
         </span>
         <span
           className="font-semibold text-red-600 cursor-pointer"
-          onClick={onSignOutClick}
+          onClick={handleUserSignedOut}
         >
           Sign out
         </span>
